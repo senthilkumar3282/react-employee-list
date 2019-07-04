@@ -60,8 +60,9 @@ class EmployeeListAsyncAwait extends Component {
 		return (	
 			<div className="section container">
 			<div className="row section-header">Employee List</div>
+			<div className="row section-body"><input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Filter fullname" /></div>
 			<div className="row section-body">
-			  <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
+			  
 			  <table className="table employee-panel">
 				<thead>
 				  <tr>
