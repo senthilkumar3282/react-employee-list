@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import EmployeeList from './components/EmployeeList';
+import EmployeeListAsyncAwait from './components/EmployeeListAsyncAwait';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <EmployeeList/>
+        <EmployeeListAsyncAwait/>
 	  </header>
     </div>
   );

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import '../styles/employee-panel.scss';
 
-class EmployeeList extends Component {
+class EmployeeListAxios extends Component {
 	
 	constructor(props) {
 		super(props);
@@ -102,4 +102,4 @@ class EmployeeList extends Component {
 	}
 }
     
-export default EmployeeList;
+export default EmployeeListAxios;

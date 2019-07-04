@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import '../styles/employee-panel.scss';
 
-class EmployeeListFetch extends Component {
+class EmployeeListAsyncAwait extends Component {
 	
 	constructor(props) {
 		super(props);
@@ -34,30 +34,25 @@ class EmployeeListFetch extends Component {
     
   }
 	
-	// Now we're going to make a request for data using fetch
-  getEmplyee() {
-      
-	fetch("employee-data.json")
-	.then((response) => {
-	  if (response.ok) {
-		return response.json();
-	  } else {
-		throw new Error(response.statusText);
-	  }
-	})
-	.then(response => {
-		
-		this.setState({
-		  employeesInit: response.data.employees,	
-		  employees: response.data.employees,
-		  isLoading: false
-		});
-	})
-	.catch(error => { console.log('error:'+error); this.setState({ errors:error, isLoading: true }) });
-  }
+	// Now we're going to make a request for data using async await
+	
 	// Let's our app know we're ready to render the data
-    componentDidMount() {
-		this.getEmplyee();
+	async componentDidMount() {
+		try {
+			const response = await fetch("employee-data.json");
+			if (!response.ok) {
+				throw Error(response.statusText);
+			}
+			const json = await response.json();
+			console.log(json);
+			this.setState({
+			  employeesInit: json.employees,	
+			  employees: json.employees,
+			  isLoading: false
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
    
 	
@@ -86,7 +81,7 @@ class EmployeeListFetch extends Component {
 									<td>{fullName}</td>
 									<td>{DOB}</td>
 									<td>{role}</td>
-									<td><img src={photo} width="100" height="100" /></td>
+									<td><img src={photo} alt={fullName} width="100" height="100" /></td>
 								</tr>
 							  );
 							})
@@ -104,4 +99,4 @@ class EmployeeListFetch extends Component {
 	}
 }
     
-export default EmployeeListFetch;
+export default EmployeeListAsyncAwait;
