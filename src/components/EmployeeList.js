@@ -21,6 +21,11 @@ class EmployeeList extends Component {
 	}
 	
 	handleChange(e){
+		
+		var updatedList = this.state.employeesInit;
+		updatedList = updatedList.filter(employee => {
+			return employee.fullName.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
+		});
 	
 		this.setState({ 
 		  employees: this.state.employeesInit,
@@ -67,7 +72,23 @@ class EmployeeList extends Component {
 						  </tr>
 						</thead>
 						<tbody>
-						
+							{!this.state.isLoading ? (
+									this.state.employees.map(employee => {
+
+									  const { id, fullName, DOB, role, photo } = employee;
+									  return (
+										<tr className="employee" key={id}>
+											<td>{fullName}</td>
+											<td>{DOB}</td>
+											<td>{role}</td>
+											<td><img src={photo} width="100" height="100" /></td>
+										</tr>
+									  );
+									})
+								
+							  ) : (
+								<tr className="employee"><td>Loading...</td></tr>
+							)}
 						</tbody>
 					</table>
 				
